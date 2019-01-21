@@ -321,7 +321,7 @@ try:
             import cec
 
             cec_config = cec.libcec_configuration()
-            cec_config.strDeviceName = "cec-ir-mqtt"
+            cec_config.strDeviceName = (config['mqtt']['client'])
             cec_config.bActivateSource = 0
             cec_config.deviceTypes.Add(cec.CEC_DEVICE_TYPE_RECORDING_DEVICE)
             cec_config.clientVersion = cec.LIBCEC_VERSION_CURRENT
