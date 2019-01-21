@@ -34,6 +34,26 @@ You can either copy `config.default.ini` to `config.ini` and adjust its properti
 
 NOTE - If you want to run this on multiple devices with same MQTT server, use the 'client' variable to adjust the MQTT client ID used to connect to the broker. Only one connection per client ID is allowed to connect to the broker (other will be dropped).
 
+# Docker Installation
+
+```
+docker run -d \
+--privileged \
+--device /dev/mem:/dev/mem \
+-e MQTT_BROKER=localhost \
+-e MQTT_PORT=1883 \
+-e MQTT_CLIENT=cec-ir-mqtt \
+-e MQTT_PREFIX=media \
+-e MQTT_USER=homeassistant \
+-e MQTT_PASSWORD=password \
+-e CEC_ENABLED=1 \
+-e CEC_ID=1 \
+-e CEC_PORT=RPI \
+-e CEC_DEVICES=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 \
+-e IR_ENABLED=0 \
+michaelarnauts/cec-mqtt-bridge
+```
+
 # Lirc
 
 You need a `lircrc` config file. This can be generated from the `lircd.conf` of your lirc daemon using the script `create_lircrc.py`.
