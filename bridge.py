@@ -14,6 +14,7 @@ config = {
     'mqtt': {
         'broker': 'localhost',
         'port': 1883,
+        'client': 'cec-ir-mqtt',
         'prefix': 'media',
         'user': os.environ.get('MQTT_USER'),
         'password': os.environ.get('MQTT_PASSWORD'),
@@ -347,7 +348,7 @@ try:
 
     ### Setup MQTT ###
     print("Initialising MQTT...")
-    mqtt_client = mqtt.Client("cec-ir-mqtt")
+    mqtt_client = mqtt.Client('client')
     mqtt_client.on_connect = mqtt_on_connect
     mqtt_client.on_message = mqtt_on_message
     if config['mqtt']['user']:
