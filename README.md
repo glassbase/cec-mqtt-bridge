@@ -32,6 +32,8 @@ A HDMI-CEC / IR to MQTT bridge written in Python 3 for connecting your AV-device
 
 You can either copy `config.default.ini` to `config.ini` and adjust its properties, or alternatively declare any of those as environment variables using the format `SECTION_KEY` (e.g., `MQTT_USER`).
 
+NOTE - If you want to run this on multiple devices with same MQTT server, use the 'client' variable to adjust the MQTT client ID used to connect to the broker. Only one connection per client ID is allowed to connect to the broker (other will be dropped).
+
 # Lirc
 
 You need a `lircrc` config file. This can be generated from the `lircd.conf` of your lirc daemon using the script `create_lircrc.py`.
@@ -89,6 +91,8 @@ The bridge publishes to the following topics:
 | `prefix`/cec/rx         | `command`                               | Notify that `command` was received.              |
 | `prefix`/ir/`remote`/rx | `key`                                   | Notify that `key` of `remote` was received. You have to configure `key` AND `remote` as config in the lircrc file.  |
 | `prefix`/ir/rx          | `key`                                   | Notify that `key` was received. You have to configure `key` in the lircrc file. This format is used if the remote is not given in the config file.  |
+
+NOTE ON VOLUME CONTROL & MUTE - Some TVs do not support volume control over CEC. Test this command `echo "volup" | cec-client -s -d 1` to determine if volume controls work over CEC on your TV, if nothing happens on your TV, your TV does not support CEC volume controls. 
 
 `id` is the address (0-15) of the device on the CEC-bus.
 
