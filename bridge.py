@@ -321,7 +321,7 @@ try:
             import cec
 
             cec_config = cec.libcec_configuration()
-            cec_config.strDeviceName = (config['mqtt']['client'])
+            cec_config.strDeviceName = "cec-ir-mqtt"
             cec_config.bActivateSource = 0
             cec_config.deviceTypes.Add(cec.CEC_DEVICE_TYPE_RECORDING_DEVICE)
             cec_config.clientVersion = cec.LIBCEC_VERSION_CURRENT
@@ -348,7 +348,7 @@ try:
 
     ### Setup MQTT ###
     print("Initialising MQTT...")
-    mqtt_client = mqtt.Client('client')
+    mqtt_client = mqtt.Client(config['mqtt']['client'])
     mqtt_client.on_connect = mqtt_on_connect
     mqtt_client.on_message = mqtt_on_message
     if config['mqtt']['user']:
